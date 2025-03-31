@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioinformatic Algorithms</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./code.js"></script>
+</head>
+<body>
+    <h1>Fitting Alignment</h1>
+    <input type="text" id="seq1Fitting" placeholder="Sequence 1">
+    <input type="text" id="seq2Fitting" placeholder="Sequence 2">
+    <input type="number" id="mismatchPenFit" placeholder="Mismatch Penalty">
+    <input type="number" id="gapPenFit" placeholder="Gap Penalty">
+    <button onclick="getFittingAlignment()">Run Fitting Alignment</button>
+    <p id="fitScore"> </p>
+    <p id="fitRange"> </p>
+    <p id="fitCIGAR"> </p>
+
+    <button id="showMatrix" style="display: none;">Show Matrix?</button>
+    <a href="index.html">Back to Main Page</a>
+</body>
+</html>
