@@ -51,11 +51,13 @@ async function buildFMIndex() {
         const response = await fetch(`/fm-index?genome=${genome}`);
         const result = await response.json();
         if(result.indexFCol != null || result.sa != null || result.tally != null || result.bwt != null){
-            document.getElementById("f-index-label").style.display = "block";
-            document.getElementById("f-index-label").innerText = "F-Index:";
-            document.getElementById("f-index-label").style.color = "#000000";
-            document.getElementById("f-index").style.display = "block";
+            const fLabel = document.getElementById("f-index-label");
+            fLabel.classList.remove("hidden", "error");
+            fLabel.classList.add("visible-block", "valid");
+            fLabel.innerText = "F-Index:";
 
+            document.getElementById("f-index").classList.remove("hidden");
+            document.getElementById("f-index").classList.add("visible-block");
 
             document.getElementById("$_count").innerText = result.indexFCol[0];
             document.getElementById("a_count").innerText = result.indexFCol[1];
@@ -63,19 +65,20 @@ async function buildFMIndex() {
             document.getElementById("g_count").innerText = result.indexFCol[3];
             document.getElementById("t_count").innerText = result.indexFCol[4];
 
-            document.getElementById("sa").style.display = "block";
-            document.getElementById("sa-link").style.display = "inline";
-            document.getElementById("sa-credit").style.display = "inline";
+            document.getElementById("sa").classList.remove("hidden");
+            document.getElementById("sa").classList.add("visible-block");
             document.getElementById("sa").innerText = "Suffix Array: " + result.sa;
             
-            
-            document.getElementById("bwt").style.display = "block";
+            document.getElementById("bwt").classList.remove("hidden");
+            document.getElementById("bwt").classList.add("visible-block");
             document.getElementById("bwt").innerText = "BWT: " + result.bwt;
             
-            
-            document.getElementById("query").style.display = "inline";
-            //document.getElementById("partialQuery").style.display = "inline";
-            document.getElementById("completeQuery").style.display = "inline";
+            document.getElementById("query").classList.remove("hidden");
+            document.getElementById("query").classList.add("visible-inline");
+            //document.getElementById("partialQuery").classList.remove("hidden");
+            //document.getElementById("partialQuery").classList.add("visible-inline");
+            document.getElementById("completeQuery").classList.remove("hidden");
+            document.getElementById("completeQuery").classList.add("visible-inline");
         }
         else{
             removeBuildFMInfo();
@@ -89,57 +92,71 @@ async function buildFMIndex() {
 }
 
 function invalidBuildGenome(){
-    document.getElementById("f-index-label").style.display = "block";
-    document.getElementById("f-index-label").style.color = "#ff0000";
-    document.getElementById("f-index-label").innerText = "Invalid Genome/Sequence (Make sure the Sentinel \'$\' is at the end of the Genome)";
+    const fLabel = document.getElementById("f-index-label");
+    fLabel.classList.remove("hidden", "valid");
+    fLabel.classList.add("visible-block", "error");
+    fLabel.innerText = "Invalid Genome/Sequence (Make sure the Sentinel '$' is at the end of the Genome)";
 }
 
 function removeBuildFMInfo(){
-    document.getElementById("f-index-label").style.display = "none";
-    document.getElementById("f-index").style.display = "none";
-    document.getElementById("query").style.display = "none";
-    //document.getElementById("partialQuery").style.display = "none";
-    document.getElementById("completeQuery").style.display = "none";
-    document.getElementById("sa").style.display = "none";
-    document.getElementById("sa-link").style.display = "none";
-    document.getElementById("sa-credit").style.display = "none";
-    document.getElementById("bwt").style.display = "none";
+    document.getElementById("f-index-label").classList.add("hidden");
+    document.getElementById("f-index-label").classList.remove("visible-block", "error", "valid");
+    document.getElementById("f-index").classList.add("hidden");
+    document.getElementById("f-index").classList.remove("visible-block");
+    document.getElementById("query").classList.add("hidden");
+    document.getElementById("query").classList.remove("visible-inline");
+    //document.getElementById("partialQuery").classList.add("hidden");
+    //document.getElementById("partialQuery").classList.remove("visible-inline");
+    document.getElementById("completeQuery").classList.add("hidden");
+    document.getElementById("completeQuery").classList.remove("visible-inline");
+    document.getElementById("sa").classList.add("hidden");
+    document.getElementById("sa").classList.remove("visible-block");
+    document.getElementById("bwt").classList.add("hidden");
+    document.getElementById("bwt").classList.remove("visible-block");
 }
 
 function removeQueryFMInfo(){
-    document.getElementById("num-of-matches").style.display = "none";
-    document.getElementById("match-list").style.display = "none";
+    document.getElementById("num-of-matches").classList.add("hidden");
+    document.getElementById("match-list").classList.add("hidden");
+    document.getElementById("num-of-matches").classList.remove("visible-block", "error", "valid");
+    document.getElementById("match-list").classList.remove("visible-block");
 }
 
 async function completeQuery() {
+    const numMatches = document.getElementById("num-of-matches");
+    const matchList = document.getElementById("match-list");
+    const queryInput = document.getElementById("query");
 
-
-    const query = document.getElementById("query").value;
+    const query = queryInput.value;
     if(query){
         if(validGenome(query)){
             const response = await fetch(`/complete-query?query=${query}`);
             const result = await response.json();
-            document.getElementById("num-of-matches").style.display = "block";
-            document.getElementById("num-of-matches").style.color = "#000000";
-            document.getElementById("match-list").style.display = "block";
+            numMatches.classList.remove("hidden", "error");
+            numMatches.classList.add("visible-block", "valid");
+            matchList.classList.remove("hidden");
+            matchList.classList.add("visible-block");
 
-            document.getElementById("num-of-matches").innerText = "Number of Matches: " + result.occs;
-            document.getElementById("match-list").innerText = "Matches found at: " + result.occ_list;
+            numMatches.innerText = "Number of Matches: " + result.occs;
+            matchList.innerText = "Matches found at: " + result.occ_list;
         }
         else{
-            document.getElementById("num-of-matches").style.display = "block";
-            document.getElementById("num-of-matches").style.color = "#ff0000";
-            document.getElementById("num-of-matches").innerText = "Invalid Genome (Do NOT include the Sentinel '$')";
-            document.getElementById("match-list").style.display = "none";
+            numMatches.classList.remove("hidden", "valid");
+            numMatches.classList.add("visible-block", "error");
+            numMatches.innerText = "Invalid Genome (Do NOT include the Sentinel '$')";
+            matchList.classList.add("hidden");
+            matchList.classList.remove("visible-block");
         }
     }
     else{
-        document.getElementById("num-of-matches").style.display = "block";
-        document.getElementById("num-of-matches").style.color = "#ff0000";
-        document.getElementById("num-of-matches").innerText = "Invalid information";
-        document.getElementById("match-list").style.display = "none";
+        numMatches.classList.remove("hidden", "valid");
+        numMatches.classList.add("visible-block", "error");
+        numMatches.innerText = "Invalid information";
+        matchList.classList.add("hidden");
+        matchList.classList.remove("visible-block");
     }
 }
+
 
 function validGenome(str) {
     for (let i = 0; i < str.length; i++) {

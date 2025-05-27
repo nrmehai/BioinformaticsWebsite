@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced String Search Algorithms by Noor Mehai</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="./code.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FM Index - Noor Mehai</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./code.js" defer></script>
 </head>
 <body>
+  <div class="container">
     <h1>FM Index</h1>
 
-    <input id="genome" type="text" placeholder="Sequence/Genome">
-    <button onclick="buildFMIndex()">Build FM Index</button>
+    <input id="genome" type="text" placeholder="Sequence/Genome" />
+    <button class="btn-primary" onclick="buildFMIndex()">Build FM Index</button>
 
-    <p id="f-index-label" style="display: none;">F-Index: </p>
-    <table id="f-index" style="display: none;">
-        <tr>
-            <td>$</td>
-            <td>A</td>
-            <td>C</td>
-            <td>G</td>
-            <td>T</td>
-        </tr>
-        <tr>
-            <td id = "$_count"></td>
-            <td id = "a_count"></td>
-            <td id = "c_count"></td>
-            <td id = "g_count"></td>
-            <td id = "t_count"></td>
-        </tr>
+    <p id="f-index-label" class="hidden">F-Index:</p>
+
+    <table id="f-index" class="hidden">
+      <tr>
+        <td>$</td>
+        <td>A</td>
+        <td>C</td>
+        <td>G</td>
+        <td>T</td>
+      </tr>
+      <tr>
+        <td id="$_count"></td>
+        <td id="a_count"></td>
+        <td id="c_count"></td>
+        <td id="g_count"></td>
+        <td id="t_count"></td>
+      </tr>
     </table>
-    <br>
 
-    <!--Suffix Array-->
-    <span id="sa" style="display: none;"></span>
-    <a id="sa-link" href="https://github.com/v-v/karkkainen-sanders" style="display: none;"></a> 
-    <span id="sa-credit" style="display: none;"></span>
-    <!--BWT-->
-    <p id="bwt" style="display: none;"></p>
+    <!-- Suffix Array -->
+    <span id="sa" class="hidden"></span>
 
-    <input id="query" style="display: none;" type="text" placeholder="Query">
-    <!--button id="partialQuery" style="display: none;" onclick="partialQuery()">Query FM Index (Partial)</button-->
-    <button id="completeQuery" style="display: none;" onclick="completeQuery()">Query FM Index</button>
-    <br>
-    
-    <p id="num-of-matches" style="display: none;"></p>
-    <p id="match-list" style="display: none;"></p>
+    <!-- BWT -->
+    <p id="bwt" class="hidden"></p>
 
-    <a href="index.html">Back to Main Page</a>
+    <input id="query" type="text" placeholder="Query" class="hidden" />
+    <!-- <button id="partialQuery" class="hidden" onclick="partialQuery()">Query FM Index (Partial)</button> -->
+    <button id="completeQuery" class="btn-primary hidden" onclick="completeQuery()">Query FM Index</button>
+
+    <p id="num-of-matches" class="hidden"></p>
+    <p id="match-list" class="hidden"></p>
+
+    <a href="index.html" class="back-link">← Back to Main Page</a>
+  </div>
 </body>
 </html>
