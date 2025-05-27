@@ -174,4 +174,15 @@ table {
   .back-link:hover {
     color: #004080;
   }
-  
+  #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    object-fit: cover;
+    z-index: -1; /* Behind everything */
+    opacity: 0.2; /* Adjust as needed */
+    pointer-events: none; /* So it doesn't block clicks */
+  }
+    
