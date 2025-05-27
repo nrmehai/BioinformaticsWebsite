@@ -71,7 +71,8 @@ public class FM_index {
 		bwtStr = bwtStr_buf.toString();
 		
 		
-		//build BWM
+		//build BWM (Not used since it has poor scalability)
+		/**
 		boolean bwm = false;
 		if(bwm) {
 			List<String> rotations = new ArrayList<String>();
@@ -85,6 +86,7 @@ public class FM_index {
 			
 			System.out.println(rotations.toString());
 		}
+		*/
 
 
             if(indexFCol[0] != 1 || genome.charAt(genome.length() -1) != '$'){
