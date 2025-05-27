@@ -17,6 +17,7 @@
 
     <input id="genome" type="text" placeholder="Sequence/Genome" />
     <button class="btn-primary" onclick="buildFMIndex()">Build FM Index</button>
+    <button class="btn-secondary" onclick="preloadFMGenome()">Preload Sample Data</button>
 
     <p id="f-index-label" class="hidden">F-Index:</p>
 
@@ -52,5 +53,11 @@
 
     <a href="index.html" class="back-link">← Back to Main Page</a>
   </div>
+
+  <script>
+    function preloadFMGenome() {
+      document.getElementById("genome").value = "ACGTCGTCCA$";
+    }
+  </script>
 </body>
 </html>

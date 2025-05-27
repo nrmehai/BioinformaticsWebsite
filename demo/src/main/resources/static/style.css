@@ -162,7 +162,7 @@ table {
   }
   
   .back-link {
-    display: inline-block;
+    display: block;
     margin-top: 10px;
     color: #0066cc;
     text-decoration: none;
@@ -185,4 +185,21 @@ table {
     opacity: 0.2; /* Adjust as needed */
     pointer-events: none; /* So it doesn't block clicks */
   }
-    
+  .btn-secondary {
+    background-color: rgba(0, 255, 255, 0.2);
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, border-color 0.3s;
+    margin: 10px 0;
+  }
+  
+  .btn-secondary:active {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: #ffffff;
+  }
+      

@@ -30,7 +30,7 @@ async function getFittingAlignment() {
         const result = await response.json();
         document.getElementById("fitScore").innerText = "Score: " + result.score;
         document.getElementById("fitScore").style.color = "#000000";
-        document.getElementById("fitRange").innerText = "The fitting range: " + result.y_start + " - " + result.y_end;
+        document.getElementById("fitRange").innerText = "The fitting range: " + result.y_start + " - " + (result.y_end - 1);
         document.getElementById("fitCIGAR").innerText = "CIGAR String: " + result.cigar;
 
         //document.getElementById("showMatrix").style.display = "block";
@@ -165,4 +165,11 @@ function validGenome(str) {
         }
     }
     return true;
+}
+
+function preloadFittingData() {
+    document.getElementById("seq1Fitting").value = "GACC";
+    document.getElementById("seq2Fitting").value = "TAGACCATT";
+    document.getElementById("mismatchPenFit").value = 1;
+    document.getElementById("gapPenFit").value = 2;
 }
